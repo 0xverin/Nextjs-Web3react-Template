@@ -4,12 +4,14 @@ import { useActiveWeb3React } from "hooks/useActiveWeb3React";
 import { useEffect } from "react";
 import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
 import { injected } from "config/constants/wallets";
+import { connectorLocalStorageKey } from "config/connectors/index";
 
 const Home: NextPage = () => {
     const { account, chainId, error, activate } = useActiveWeb3React();
 
     useEffect(() => {
-        console.log(error);
+        console.log(window.localStorage.getItem(connectorLocalStorageKey));
+
         activate(injected, undefined, true).catch((error) => {
             activate(injected);
         });
